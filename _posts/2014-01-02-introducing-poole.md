@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Introducing Poole
-comments: True
+comments: true
 ---
 hello there
 
