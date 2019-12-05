@@ -3,10 +3,10 @@ permalink:           pretty
 
 # Setup
 title:               Anthony Hu
-tagline:             Personal blog - new
+tagline:             Personal blog - new baseurl
 url:                 https://anthonyhu.github.io/
 paginate:            1
-baseurl:             https://anthonyhu.github.io/
+baseurl:             ""
 
 # Assets
 #
