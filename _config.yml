@@ -3,7 +3,7 @@ permalink:           pretty
 
 # Setup
 title:               Anthony Hu
-tagline:             Personal blog - new baseurl
+tagline:             Personal blog - new baseurl live modif? try modif ok ok
 url:                 https://anthonyhu.github.io/
 paginate:            1
 baseurl:             ""
@@ -20,11 +20,6 @@ author:
   name:              Anthony Hu
   url:               https://twitter.com/hu_anth
   email:             ah2029@cam.ac.uk
-
-# Custom vars
-version:             2.0.0
-github:
-  repo:              https://github.com/poole/poole
 
 plugins:
   - jekyll-paginate
