@@ -2,6 +2,7 @@
 layout: post
 title: Introducing Poole
 comments: true
+permalink: introducing-poole
 ---
 hello there
 
