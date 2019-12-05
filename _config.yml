@@ -3,7 +3,7 @@ permalink:           pretty
 
 # Setup
 title:               Anthony Hu
-tagline:             Personal blog - new baseurl live modif? try modif ok ok
+tagline:             Personal blog
 url:                 https://anthonyhu.github.io/
 paginate:            1
 baseurl:             ""
@@ -24,3 +24,8 @@ author:
 plugins:
   - jekyll-paginate
   - jekyll-gist
+
+# Navigation bar
+pages_list:
+  Posts: '/blog_posts'
+  About: '/about'
