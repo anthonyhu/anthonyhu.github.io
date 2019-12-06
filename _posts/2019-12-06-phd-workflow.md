@@ -1,8 +1,8 @@
 ---
 layout: post
 title: PhD research workflow
-comments: true
 permalink: phd-workflow
+comments: true
 ---
 I just finished the first year of my PhD and I've decided to write a guide on good practices for a PhD researcher to 
 structure day-to-day work. This guide is broken down into four sections, that can each be read independently depending 
@@ -224,7 +224,9 @@ Fetch data time: 10ms, model update time: 8ms
 ...
 ```
 
-Next we will cover how to run and organise reproducible experiments and how to setup a remote environment.
+Next we will cover how to run and organise [reproducible experiments]({% post_url 2019-12-06-run-experiments%}), 
+how to setup a reliable [python environment]({% post_url 2019-12-06-python-environment%}), and how to productively
+[work remotely]({% post_url 2019-12-06-remote-workflow%}).
 
 
 -----
