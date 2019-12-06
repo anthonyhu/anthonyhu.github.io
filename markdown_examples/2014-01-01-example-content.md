@@ -51,6 +51,8 @@ Vivamus sagittis lacus vel augue rutrum faucibus dolor auctor. Duis mollis, est 
 
 Inline code is available with the `<code>` element. Snippets of multiple lines of code are supported through Pygments. Longer lines will automatically scroll horizontally when needed.
 
+// not working on github.pages
+// The tag `ihighlight` on line 48 in `_posts/2014-01-01-example-content.md` is not a recognized Liquid tag. For more information, see https://help.github.com/en/github/working-with-github-pages/troubleshooting-jekyll-build-errors-for-github-pages-sites#unknown-tag-error.
 Inline hightlight: {% ihighlight python %} from random import random {% endihighlight %}
 
 
