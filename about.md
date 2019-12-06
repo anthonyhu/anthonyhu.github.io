@@ -5,7 +5,7 @@ title: About
 
 ### Education
 
-I am a PhD Student in Computer Vision at Cambridge under the supervision of Prof. Roberto Cipolla. I graduated from 
+I am a PhD student in Computer Vision at Cambridge University, under the supervision of Prof. Roberto Cipolla. I graduated from 
 Oxford University with an MSc in Applied Statistics, and prior to that I went to Telecom Paris, a French Engineering Grande Ecole. 
 
 ### Work experience

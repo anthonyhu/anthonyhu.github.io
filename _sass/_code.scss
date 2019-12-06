@@ -2,25 +2,33 @@
 //
 // Inline and block-level code snippets. Includes tweaks to syntax highlighted
 // snippets from Pygments/Rouge and Gist embeds.
+// explained here: https://www.bytedude.com/jekyll-syntax-highlighting-and-line-numbers/
 
+/* Applies to all code blocks */
 code,
 pre {
   font-family: Menlo, Monaco, "Courier New", monospace;
 }
 
+/* Inline code, no highlight */
 code {
-  padding: .25em .5em;
+  padding: .3em .3em;
   font-size: 85%;
   color: #bf616a;
   background-color: #f9f9f9;
   border-radius: 3px;
 }
 
+/* Inline code, highlight */
+code.highlight {}
+
+/* Block code, no highlight [background] */
 pre {
   margin-top: 0;
   margin-bottom: 1rem;
 }
 
+/* Block code, no highlight [code] */
 pre code {
   padding: 0;
   font-size: 100%;
@@ -28,10 +36,11 @@ pre code {
   background-color: transparent;
 }
 
+/* Block code, highlight */
 // Pygments via Jekyll
 .highlight {
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 0.4rem;
+  margin-bottom: 0.2rem;
   font-size: .8rem;
   line-height: 1.4;
   background-color: #f9f9f9;
