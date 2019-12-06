@@ -9,10 +9,10 @@ structure day-to-day work. This guide is broken down into four sections, that ca
 on your needs. 
 
 ### Contents
-1. Code structure
-2. Run experiments
-3. Python environment
-4. Remote workflow
+1. [Code structure]({% post_url 2019-12-06-phd-workflow%})
+2. [Run experiments]({% post_url 2019-12-06-run-experiments%})
+3. [Python environment]({% post_url 2019-12-06-python-environment%})
+4. [Remote workflow]({% post_url 2019-12-06-remote-workflow%})
 
 -----
 
