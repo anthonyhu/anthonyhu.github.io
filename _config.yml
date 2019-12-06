@@ -27,7 +27,7 @@ plugins:
 
 # Navigation bar
 pages_list:
-  Posts: '/blog_posts'
+  Posts: '/posts'
   About: '/about'
 
 # Google Analytics ID
