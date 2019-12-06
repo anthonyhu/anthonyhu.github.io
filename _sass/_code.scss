@@ -20,7 +20,9 @@ code {
 }
 
 /* Inline code, highlight */
-code.highlight {}
+code.highlight {
+  color: #515151;
+}
 
 /* Block code, no highlight [background] */
 pre {

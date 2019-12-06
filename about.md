@@ -3,6 +3,8 @@ layout: page
 title: About
 ---
 
+<p align='center'><img src='/img/me.jpg' alt='Me' width='200'/></p>
+
 ### Education
 
 I am a PhD student in Computer Vision at Cambridge University, under the supervision of Prof. Roberto Cipolla. I graduated from 

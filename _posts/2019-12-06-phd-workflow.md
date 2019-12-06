@@ -4,61 +4,65 @@ title: PhD research workflow
 comments: true
 permalink: phd-workflow
 ---
-I just finished the first year of my PhD and I've decided to write a guide with good practices for a PhD researcher to 
+I just finished the first year of my PhD and I've decided to write a guide on good practices for a PhD researcher to 
 structure day-to-day work. This guide is broken down into four sections, that can each be read independently depending 
 on your needs. 
 
 ### Contents
-
 1. Code structure
 2. Run experiments
 3. Python environment
 4. Remote workflow
 
-In this post I will cover __Code structure__ and the remaining sections are available on separate blog posts.
-
 -----
 
-## Code structure
+## 1. Code structure
+Quality code is essential for good research. Throughout our PhD, we should aim at building a codebase that becomes 
+increasingly richer while remaining easy to use. I'll discuss the structure of a machine learning codebase in 
+PyTorch, but it may be applicable to other fields.
 
-Good code is essential for good research. Throughout the PhD, we need to build a codebase that becomes increasingly 
-richer while remaining easy to use. I'll outline the structure of a machine learning oriented codebase, but it may be 
-applicable to other fields.
+In machine learning, we first prepare the __data__, then define the __model architecture and loss function__, and 
+finally we __train the model__ with an optimiser. This is what we should focus our research efforts on.
 
-In machine learning, we first prepare the data, then we define the model and the loss function, and finally we train 
-the model with an optimiser. These three steps are common to any machine learning, and thus shape the structure of our 
-codebase.
+All the rest (monitoring metrics on tensorboard, saving/restoring model weights, printing log outputs, 
+checking how much time data preprocessing/
+forward/backward pass takes, how much longer the model needs to train etc.) should only be implemented once, and reused
+across models. This blog post presents a code structure where the mentioned helping tools are implemented, enabling us
+to only spend time on actual research.
 
-I will now briefly outline the code structure, using PyTorch. More details are available on the following github 
-repository: [https://github.com/anthonyhu/vision](https://github.com/anthonyhu/vision).
-
-We are going to use a general `Trainer` class that implements all the necessary steps of training. The only argument 
+We are going to use a general `Trainer` class that implements all the training logic. The only argument 
 to the trainer is the path to a config file, that contains all the training settings (batch size, number of workers, 
-learning rate etc) and the hyperparameters of the model. 
+learning rate etc) and the hyperparameters of the model to easily reproduce experiments and restore models.
 
-### 1. Trainer initialisation
-Let us go step by step in the init function.
+I will now briefly outline the code structure. The full implementation is available on the following [github 
+repository](https://github.com/anthonyhu/vision). 
+
+### 1.1. Trainer initialisation
+Let us go step by step in the init function of the general `Trainer` class.
 
 #### Session
 ```python
 self.config = None
 self.session_name = ''
+# Initialise the session by creating a new folder named self.session_name for 
+# the experiment specified by the config file
 self.initialise_session()
 
 self.tensorboard = SummaryWriter(self.session_name, comment=self.config.tag)
 self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
 ```
 
-We initialise the session by creating a new folder for the experiment we ran. The name of the folder looks like 
-`session_direwolf_2019_12_05_16_40_34_experiment_name/`. `direwolf` is the name of my machine. In this folder, 
-we will have the config file used to create the training session, checkpoints of the model/optimiser and a tensorboard 
-log.
+The name of the folder follows the format `session_{machine}_{time}_{tag}`, with the tag specifying the name of 
+that particular experiment. 
+For example `session_direwolf_2019_12_05_16_40_34_baseline/`. In this folder, we will have the config file used 
+to create the training session, checkpoints of the model/optimiser, tensorboard 
+file and a log file that contains all the terminal outputs during training.
 
 #### Data
 ```python
+# Initialise the pytorch Dataset and DataLoader classes
 self.train_dataset, self.val_dataset = None, None
 self.train_dataloader, self.val_dataloader = None, None
-# Initialise the pytorch Dataset and DataLoader classes
 self.create_data()
 ```
 
@@ -73,12 +77,14 @@ self.model.to(self.device)
 
 #### Loss
 ```python
+# Create the model loss function
 self.loss_fn = None
 self.create_loss()
 ```
 
 #### Optimiser
 ```python
+# Initialise the optimiser
 self.optimiser = None
 self.create_optimiser()
 ```
@@ -91,9 +97,12 @@ self.val_metrics = None
 self.create_metrics()
 ```
 
+The abstract methods `self.create_data`, `self.create_model()`, etc., need to be implemented for each new project, and
+they are the only thing that needs to be implemented. The `Trainer` class will handle everything else. We will show
+shortly an example implementation on CIFAR.
 
-### 2. Train step
-Now let us see how the model computes one training step:
+### 1.2. Train step
+Now let us see how the model computes one training step. This is the function `Trainer.train_step()`.
 ```python
 # Fetch a training batch
 batch = self._get_next_batch()
@@ -128,8 +137,11 @@ Iteration  100/10000 | examples/s: 7785.4 | loss: 1.3832 | time elapsed: 00h00m0
 Fetch data time: 2ms, model update time: 7ms
 ```
 
-### 3. How to train a new model
-In practice, you can fork my repository at [https://github.com/anthonyhu/vision](https://github.com/anthonyhu/vision) 
+The `train_step` function is very general and work with any input `batch`, which is a Python dictionary containing the
+inputs of the model as well as the labels (for supervised training) given by the PyTorch DataLoader. 
+
+### 1.3. How to train a new model
+In practice, simply fork my [repository](https://github.com/anthonyhu/vision) 
 and implement the following abstract methods of the trainer. The repository contains an example that trains a CIFAR10 
 model in only a few lines of code:
 
@@ -212,8 +224,11 @@ Fetch data time: 10ms, model update time: 8ms
 ...
 ```
 
-```python
-def visualise(self, batch, output, mode)
-```
+Next we will cover how to run and organise reproducible experiments and how to setup a remote environment.
 
-This is `print("Hello world")`{.python} inline code.
+
+-----
+_Big thanks to Wayve, who taught me how to effectively structure my code._ 
+
+
+
