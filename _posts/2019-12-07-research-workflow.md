@@ -144,7 +144,7 @@ by 'time left').
 The `train_step` function is very general and work with any input `batch`, which is a Python dictionary containing the
 inputs of the model as well as the labels (for supervised learning) given by the PyTorch DataLoader. 
 
-### 1.3 Train
+### 1.3 Training the model
 The main method of the trainer is `Trainer.train`: it optimises the model, outputs the metrics and visualisation, 
 and saves checkpoint during training.
 
@@ -165,7 +165,7 @@ def train(self):
                 self.save_checkpoint()
 ```
 
-### 1.4. Practical example
+### 1.4. Example
 In practice, simply fork my [repository](https://github.com/anthonyhu/vision) 
 and implement the abstract methods of the trainer. The repository contains an example that trains a CIFAR10 
 model with only a few lines of code:
@@ -174,8 +174,8 @@ model with only a few lines of code:
 # Inherit from the general `Trainer` class
 class CifarTrainer(Trainer):
     def create_data(self):
-        self.train_dataset = CifarDataset(DATA_ROOT, mode='train')
-        self.val_dataset = CifarDataset(DATA_ROOT, mode='val')
+        self.train_dataset = CifarDataset(mode='train')
+        self.val_dataset = CifarDataset(mode='val')
 
         self.train_dataloader = DataLoader(
             self.train_dataset, batch_size=self.config.batch_size, 
