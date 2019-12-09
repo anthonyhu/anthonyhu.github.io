@@ -216,15 +216,15 @@ Running `python run_training.py --config experiments/cifar.yml` then produces th
 ```
 Iteration  100/10000 | examples/s: 7785.4 | loss: 1.3832 | time elapsed: 00h00m02s 
                      | time left: 00h04m46s
-Fetch data time: 10ms, model update time: 7ms
+Fetch data time: 2ms, model update time: 7ms
 
 Iteration  200/10000 | examples/s: 7326.7 | loss: 1.3379 | time elapsed: 00h00m04s 
                      | time left: 00h03m58s
-Fetch data time: 8ms, model update time: 9ms
+Fetch data time: 2ms, model update time: 9ms
 
 Iteration  300/10000 | examples/s: 7199.7 | loss: 1.1732 | time elapsed: 00h00m06s 
                      | time left: 00h03m42s
-Fetch data time: 8ms, model update time: 10ms
+Fetch data time: 3ms, model update time: 10ms
 
 ----------------------------------------------------------------------------------
 Validation
@@ -242,22 +242,21 @@ Model saved to: /path/to/experiment/checkpoint
 -----------------------------------------------------------------------------------
 Iteration  400/10000 | examples/s: 5816.1 | loss: 1.0277 | time elapsed: 00h00m09s 
                      | time left: 00h03m39s
-Fetch data time: 8ms, model update time: 11ms
+Fetch data time: 2ms, model update time: 11ms
 
 Iteration  500/10000 | examples/s: 5675.3 | loss: 1.0342 | time elapsed: 00h00m11s 
                      | time left: 00h03m32s
-Fetch data time: 10ms, model update time: 8ms
+Fetch data time: 3ms, model update time: 8ms
 ...
 ```
 
-To get started.. conda env create etc.
+If the training is interrupted, it can be resumed by pointing to the path of the experiment:
+`python run_training.py --restore /path/to/experiment/`.
 
-Next we will cover how to run and organise [reproducible experiments]({% post_url 2019-12-06-run-experiments%}), 
+Next we will cover how to run [reproducible experiments]({% post_url 2019-12-06-run-experiments%}), 
 how to setup a reliable [python environment]({% post_url 2019-12-07-python-environment%}), and how to productively
 [work remotely]({% post_url 2019-12-07-remote-work%}).
 
-
-restore model
 
 -----
 _Big thanks to the Wayve team, who taught me how to effectively structure my code._ 
