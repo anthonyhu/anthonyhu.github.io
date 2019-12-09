@@ -20,7 +20,7 @@ project.
 Here is an example of an `environment.yml` file.
 ```yaml
 # Name of the environment
-name: phd-research
+name: ml-research
 # Packages installed with conda
 dependencies:
 - python=3.6.9

@@ -1,68 +1,69 @@
 ---
 layout: post
-title: PhD research workflow
-permalink: phd-workflow
+title: Research workflow
+permalink: research-workflow
 comments: true
 ---
-I just finished the first year of my PhD and I've decided to write a guide on good practices for a PhD researcher to 
-structure day-to-day work. This guide is broken down into four sections, that can each be read independently depending 
-on your needs. 
+This guide contains good practices for a machine learning researcher to structure day-to-day work. It's broken down 
+into four sections, that can each be read independently depending on your needs.  
 
-### Contents
-1. [Code structure]({% post_url 2019-12-06-phd-workflow%})
+### Content
+1. [Code structure]({% post_url 2019-12-07-research-workflow%})
 2. [Run experiments]({% post_url 2019-12-06-run-experiments%})
-3. [Python environment]({% post_url 2019-12-06-python-environment%})
-4. [Remote workflow]({% post_url 2019-12-06-remote-workflow%})
+3. [Python environment]({% post_url 2019-12-07-python-environment%})
+4. [Remote work]({% post_url 2019-12-07-remote-work%})
+
+The most important section is __1. Code structure__ as it covers how to design a machine learning model in 
+PyTorch with a detailed example. Anyone who want to get started, or to better organise their codebase, should find this
+section useful.
+
+The __remaining sections__ (2. Run experiments, 3. Python environment, 4. Remote work) should benefit those
+who work day-to-day on machine learning research (e.g. run and organise experiments on multiple machines, while working
+remotely).
 
 -----
 
 ## 1. Code structure
-Quality code is essential for good research. Throughout our PhD, we should aim at building a codebase that becomes 
-increasingly richer while remaining easy to use. I'll discuss the structure of a machine learning codebase in 
-PyTorch, but it may be applicable to other fields.
+Quality code is essential for good research. We should aim at building a codebase that becomes increasingly richer while 
+remaining easy to use. We'll discuss the structure of a machine learning codebase in PyTorch, but it may be applicable 
+to other fields.
 
-In machine learning, we first prepare the __data__, then define the __model architecture and loss function__, and 
-finally we __train the model__ with an optimiser. This is what we should focus our research efforts on.
+In machine learning, we first prepare the __data__, then define the __model architecture + loss__, and 
+finally __train__ the model. This is where we should focus our research efforts on.
 
-All the rest (monitoring metrics on tensorboard, saving/restoring model weights, printing log outputs, 
-checking how much time data preprocessing/
-forward/backward pass takes, how much longer the model needs to train etc.) should only be implemented once, and reused
-across models. This blog post presents a code structure where the mentioned helping tools are implemented, enabling us
-to only spend time on actual research.
+_Everything else_ (monitoring metrics on tensorboard, saving/restoring model weights, printing log outputs etc.) should 
+only be implemented once, and reused across models. 
 
-We are going to use a general `Trainer` class that implements all the training logic. The only argument 
-to the trainer is the path to a config file, that contains all the training settings (batch size, number of workers, 
-learning rate etc) and the hyperparameters of the model to easily reproduce experiments and restore models.
-
-I will now briefly outline the code structure. The full implementation is available on the following [github 
-repository](https://github.com/anthonyhu/vision). 
-
+We're going to implement a general `Trainer` class that contains all the training logic (i.e. what we called 
+_everything else_). Whenever we want to build a new model, we simply have to implement the data and model creation, and 
+to illustrate how straightforward it is, we'll go through a detailed example. 
+ 
 ### 1.1. Trainer initialisation
-Let us go step by step in the init function of the general `Trainer` class.
+Let us go step by step in the init function of the general `Trainer` class. The only argument 
+to the trainer is the path to a config file, that contains all the training settings (batch size, number of workers, 
+learning rate etc.) and the hyperparameters of the model to easily reproduce experiments.
 
-#### Session
+#### Training session
 ```python
-self.config = None
-self.session_name = ''
-# Initialise the session by creating a new folder named self.session_name for 
-# the experiment specified by the config file
+# Initialise the training session by creating a new folder named `self.session_name`
+self.session_name = None
 self.initialise_session()
 
-self.tensorboard = SummaryWriter(self.session_name, comment=self.config.tag)
+self.tensorboard = SummaryWriter(self.session_name)
+# Use the gpu if available
 self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
 ```
 
-The name of the folder follows the format `session_{machine}_{time}_{tag}`, with the tag specifying the name of 
-that particular experiment. 
-For example `session_direwolf_2019_12_05_16_40_34_baseline/`. In this folder, we will have the config file used 
-to create the training session, checkpoints of the model/optimiser, tensorboard 
-file and a log file that contains all the terminal outputs during training.
+The name of the folder follows the format `session_{machine}_{time}_{tag}`, with the tag (contained in the config file) 
+specifying the name of the experiment. This folder will contain: a copy of the config file used 
+to create the training session, the checkpoints of the model/optimiser, the tensorboard 
+file and a .txt log file with all the terminal outputs.
 
 #### Data
 ```python
-# Initialise the pytorch Dataset and DataLoader classes
 self.train_dataset, self.val_dataset = None, None
 self.train_dataloader, self.val_dataloader = None, None
+# Abstract method that initialises the PyTorch Dataset and DataLoader classes 
 self.create_data()
 ```
 
@@ -71,7 +72,6 @@ self.create_data()
 # Build the neural network and move it to the desired device
 self.model = None
 self.create_model()
-print_model_spec(self.model)
 self.model.to(self.device)
 ```
 
@@ -97,14 +97,16 @@ self.val_metrics = None
 self.create_metrics()
 ```
 
-The abstract methods `self.create_data`, `self.create_model()`, etc., need to be implemented for each new project, and
-they are the only thing that needs to be implemented. The `Trainer` class will handle everything else. We will show
-shortly an example implementation on CIFAR.
+For each new project, we simply need to implement the abstract methods `self.create_data`, `self.create_model`, 
+`self.create_loss`, `self.create_optimiser` and `self.create_metrics`. The general `Trainer` class will handle 
+everything else. We will shortly show an example implementation on CIFAR10, a classification dataset of tiny 32x32 
+images.
 
 ### 1.2. Train step
 Now let us see how the model computes one training step. This is the function `Trainer.train_step()`.
 ```python
-# Fetch a training batch
+# Fetch a training batch. `batch` is a dictionary containing all the inputs 
+# and labels.
 batch = self._get_next_batch()
 # Cast the batch to gpu
 self.preprocess_batch(batch)
@@ -120,13 +122,11 @@ self.optimiser.step()
 
 # Print a log output to monitor training
 if self.global_step % self.config.print_iterations == 0:
-    step_duration = time() - t0
-    self.print_log(loss, step_duration, data_fetch_time, model_update_time)
+    self.print_log(loss)
     self.tensorboard.add_scalar('train/loss', loss.item(), self.global_step)
 
 # Visualise
 if self.global_step % self.config.vis_iterations == 0:
-    self.train_metrics.update(output, batch['label'])
     self.visualise(batch, output, 'train')
 ```
 
@@ -137,15 +137,41 @@ Iteration  100/10000 | examples/s: 7785.4 | loss: 1.3832 | time elapsed: 00h00m0
 Fetch data time: 2ms, model update time: 7ms
 ```
 
-The `train_step` function is very general and work with any input `batch`, which is a Python dictionary containing the
-inputs of the model as well as the labels (for supervised training) given by the PyTorch DataLoader. 
+We monitor how long data preparation takes (if it's too slow, we might need more workers), here 2ms, and how much time
+a single update takes, here 7ms. Optimising these two values will result in an overall lower training time (indicated
+by 'time left'). 
 
-### 1.3. How to train a new model
-In practice, simply fork my [repository](https://github.com/anthonyhu/vision) 
-and implement the following abstract methods of the trainer. The repository contains an example that trains a CIFAR10 
-model in only a few lines of code:
+The `train_step` function is very general and work with any input `batch`, which is a Python dictionary containing the
+inputs of the model as well as the labels (for supervised learning) given by the PyTorch DataLoader. 
+
+### 1.3 Train
+The main method of the trainer is `Trainer.train`: it optimises the model, outputs the metrics and visualisation, 
+and saves checkpoint during training.
 
 ```python
+def train(self):
+    # Set the model in train mode
+    self.model.train()
+
+    while self.global_step < self.config.n_iterations:
+        self.global_step += 1
+        self.train_step()
+
+        if self.global_step % self.config.val_iterations == 0:
+            score = self.test()
+
+            if score > self.best_score:
+                self.best_score = score
+                self.save_checkpoint()
+```
+
+### 1.4. Practical example
+In practice, simply fork my [repository](https://github.com/anthonyhu/vision) 
+and implement the abstract methods of the trainer. The repository contains an example that trains a CIFAR10 
+model with only a few lines of code:
+
+```python
+# Inherit from the general `Trainer` class
 class CifarTrainer(Trainer):
     def create_data(self):
         self.train_dataset = CifarDataset(DATA_ROOT, mode='train')
@@ -224,13 +250,17 @@ Fetch data time: 10ms, model update time: 8ms
 ...
 ```
 
-Next we will cover how to run and organise [reproducible experiments]({% post_url 2019-12-06-run-experiments%}), 
-how to setup a reliable [python environment]({% post_url 2019-12-06-python-environment%}), and how to productively
-[work remotely]({% post_url 2019-12-06-remote-workflow%}).
+To get started.. conda env create etc.
 
+Next we will cover how to run and organise [reproducible experiments]({% post_url 2019-12-06-run-experiments%}), 
+how to setup a reliable [python environment]({% post_url 2019-12-07-python-environment%}), and how to productively
+[work remotely]({% post_url 2019-12-07-remote-work%}).
+
+
+restore model
 
 -----
-_Big thanks to Wayve, who taught me how to effectively structure my code._ 
+_Big thanks to the Wayve team, who taught me how to effectively structure my code._ 
 
 
 

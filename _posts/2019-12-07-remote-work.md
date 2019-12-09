@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Remote workflow
-permalink: remote-workflow
+title: Remote work
+permalink: remote-work
 comments: true
 ---
 
 Usually, we code on our personal machine (that might not have a GPU), and run experiments on remote servers. First,
-we must ensure that all machines use the same [python environment]({% post_url 2019-12-06-python-environment%}). 
+we must ensure that all machines use the same [python environment]({% post_url 2019-12-07-python-environment%}). 
 
 Then we setup the ssh configuration to be able to connect to a remote server with a simple command like `ssh direwolf`.
 Here is my `~/.ssh/config` file to log into my machine in my lab from my personal laptop.
