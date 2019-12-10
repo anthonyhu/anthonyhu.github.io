@@ -61,18 +61,7 @@ $black-lighter: #111;
 $black-light: #090909;
 $black: #000;
 
-// Text
-$color-text--color: mix($blue-dark, $gray-dark, 25%);
-$color-footer--color: mix($blue-lighter, $white-darker);
-
-//// Breakpoints
-//$breakpoints: (
-//    s: (480px, 767px),
-//    m: (768px, 959px),
-//    l: (960px, 1599px),
-//    xl: (1600px, 1799px),
-//    xxl: 1800px
-//);
+$color-footer: $gray-dark;
 
 %visuallyhidden,
 .visuallyhidden { // Hide only visually, but have it available for screenreaders: h5bp.com/v
@@ -105,9 +94,7 @@ $color-footer--color: mix($blue-lighter, $white-darker);
 
 .site-footer {
   text-align: center;
-  color: $color-footer--color;
-  text-shadow: 0 1px 1px rgba($color-text--color, 0.25);
-
+  color: $color-footer;
   @include breakpoint(l) {
     text-align: left;
   }
@@ -128,46 +115,6 @@ $color-footer--color: mix($blue-lighter, $white-darker);
 
 .site-footer--copyright {
   display: inline-block;
-  margin-right: 5px;
-}
-
-.site-footer--feed {
-  position: relative;
-  top: 2px;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  line-height: 0;
-
-  &:hover,
-  &:focus {
-
-    .icon-rss--background {
-      opacity: 1;
-    }
-
-    .icon-rss--foreground {
-      fill: #ff6600;
-    }
-  }
-
-  .icon-rss {
-    width: inherit;
-    height: inherit;
-  }
-
-  .icon-rss--background {
-    fill: $white;
-    opacity: 0;
-    transition: opacity 0.2s;
-    backface-visibility: hidden;
-  }
-
-  .icon-rss--foreground {
-    fill: $color-footer--color;
-    transition: fill 0.2s;
-    backface-visibility: hidden;
-  }
 }
 
 
@@ -176,20 +123,34 @@ $color-footer--color: mix($blue-lighter, $white-darker);
 // -------------------------------------
 
 .site-footer--secondary {
-  margin-bottom: 6%;
-
   @include breakpoint(l) {
     float: right;
-    margin-bottom: 0;
+    margin-bottom: 1%;
   }
 }
 
 .site-footer--icons {
+  font-size: 0;
   text-align: center;
 }
 
+.site-footer--icons__icon {
+  margin-right: 8px;
+  // Supposes that .svg got an 'icon' and 'icon-foreground' attribute. Look at the declaration of rss.svg for example
+  .icon {
+    width: 30px;
+    height: 30px;
+    transition: transform 0.2s;
+    backface-visibility: hidden;
+  }
+
+  .icon-foreground {
+    fill: $color-footer;
+  }
+}
+
 .site-footer--icons__anchor {
-  display: block;
+  display: inline-block;
   color: inherit;
 
   &:hover,
@@ -206,23 +167,32 @@ $color-footer--color: mix($blue-lighter, $white-darker);
   }
 }
 
-.site-footer--icons__icon {
-
-  .icon {
-    width: 30px;
-    height: 30px;
-    transition: transform 0.2s;
-    backface-visibility: hidden;
-  }
-
-  .icon-foreground {
-    fill: $color-footer--color;
+// Twitter
+.site-footer--icons__twitter {
+  &:hover,
+  &:focus {
+    .icon-foreground {
+      fill: #1da1f2;
+    }
   }
 }
 
-.site-footer--icons--title {
-  display: block;
-  opacity: 0;
-  transition: opacity 0.2s;
-  backface-visibility: hidden;
+// Github
+.site-footer--icons__github {
+  &:hover,
+  &:focus {
+    .icon-foreground {
+      fill: #171717;
+    }
+  }
+}
+
+// Github
+.site-footer--icons__rss {
+  &:hover,
+  &:focus {
+    .icon-foreground {
+      fill: #ff6600;
+    }
+  }
 }
