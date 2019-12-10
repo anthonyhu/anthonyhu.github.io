@@ -11,9 +11,11 @@
         <h3 class="masthead-title">
           <a href="/" title="Home">{{ site.title }}</a>
           <small>{{ site.tagline }}</small>
-          {% for page in site.pages_list %}
-              &nbsp;&nbsp;&nbsp;<small-list><a href="{{ page[1]  }}">{{ page[0] }}</a></small-list>
-          {% endfor %}
+          <div style="float: right">
+            {% for page in site.pages_list %}
+                &nbsp;&nbsp;&nbsp;<small-list><a href="{{ page[1]  }}">{{ page[0] }}</a></small-list>
+            {% endfor %}
+          </div>
         </h3>
 
       </header>
@@ -25,11 +27,7 @@
       <!-- Discuss comments -->
       {% include comments.html %}
 
-      <footer class="footer">
-        <small>
-          &copy; <time datetime="{{ site.time | date_to_xmlschema }}">{{ site.time | date: '%Y' }}</time>. All rights reserved.
-        </small>
-      </footer>
+      {% include footer.html %}
     </div>
 
   </body>

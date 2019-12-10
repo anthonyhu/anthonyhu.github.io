@@ -1,0 +1,23 @@
+// ==========================================================================
+// Mixins
+// ==========================================================================
+
+// Breakpoint
+// ==========================================================================
+@mixin breakpoint($point) {
+  @if $point == s {
+    @media (min-width: 480px) { @content; }
+  }
+  @if $point == m {
+    @media (min-width: 768px) { @content; }
+  }
+  @if $point == l {
+    @media (min-width: 960px) { @content; }
+  }
+  @if $point == xl {
+    @media (min-width: 1600px) { @content; }
+  }
+  @elseif $point == xxl {
+    @media (min-width: 1800px) { @content; }
+  }
+}

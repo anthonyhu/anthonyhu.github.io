@@ -1,0 +1,26 @@
+<footer class="site-footer clearfix" role="contentinfo">
+<div class="site-footer--primary clearfix">
+  <small><p class="site-footer--copyright">&copy; {{ site.time | date: "%Y" }} Anthony Hu. All rights reserved.</p></small>
+  <a class="site-footer--feed" href="/atom.xml" title="Subscribe to my RSS feed">
+    {% include icons/icon-rss.svg %}
+    <span class="visuallyhidden">RSS Feed</span>
+  </a>
+</div>
+
+<div class="site-footer--secondary">
+  <ul class="site-footer--icons list-inline">
+    <li class="site-footer--icons__item">
+      <a class="site-footer--icons__anchor site-footer--icons__icon" href="https://twitter.com/hu_anth">
+        {% include icons/icon-twitter.svg %}
+        <span class="site-footer--icons--title">Twitter</span>
+      </a>
+    </li>
+    <li class="site-footer--icons__item">
+      <a class="site-footer--icons__anchor site-footer--icons__icon" href="https://github.com/anthonyhu">
+        {% include icons/icon-github.svg %}
+        <span class="site-footer--icons--title">GitHub</span>
+      </a>
+    </li>
+  </ul>
+</div>
+</footer>

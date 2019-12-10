@@ -4,6 +4,9 @@ title: Research workflow
 permalink: research-workflow
 comments: true
 ---
+
+<p align='center'><img src='/img/research-workflow.jpg' alt='research-workflow'/></p>
+
 This guide contains good practices for a machine learning researcher to structure day-to-day work. It's broken down 
 into four sections, that can each be read independently depending on your needs.  
 
@@ -260,6 +263,3 @@ how to setup a reliable [python environment]({% post_url 2019-12-07-python-envir
 
 -----
 _Big thanks to the Wayve team, who taught me how to effectively structure my code._ 
-
-
-
