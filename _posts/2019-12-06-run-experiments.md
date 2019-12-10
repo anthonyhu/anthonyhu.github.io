@@ -62,4 +62,4 @@ git checkout <git_hash>
 And run the experiment. If from this commit we'd like to create a new branch, that's possible with `git checkout -b <branch_name>`. 
 Otherwise, we can go back to master with `git checkout master`.
 
-
+-----

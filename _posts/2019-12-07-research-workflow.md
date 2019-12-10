@@ -3,8 +3,8 @@ layout: post
 title: Research workflow
 permalink: research-workflow
 comments: true
+github: https://github.com/anthonyhu/vision
 ---
-
 <p align='center'><img src='/img/research-workflow.jpg' alt='research-workflow'/></p>
 
 This guide contains good practices for a machine learning researcher to structure day-to-day work. It's broken down 
@@ -169,7 +169,7 @@ def train(self):
 ```
 
 ### 1.4. Example
-In practice, simply fork my [repository](https://github.com/anthonyhu/vision) 
+In practice, simply fork my [repository]({{ page.github }}) 
 and implement the abstract methods of the trainer. The repository contains an example that trains a CIFAR10 
 model with only a few lines of code:
 
@@ -260,6 +260,5 @@ Next we will cover how to run [reproducible experiments]({% post_url 2019-12-06-
 how to setup a reliable [python environment]({% post_url 2019-12-07-python-environment%}), and how to productively
 [work remotely]({% post_url 2019-12-07-remote-work%}).
 
-
 -----
-_Big thanks to the Wayve team, who taught me how to effectively structure my code._ 
+_Big thanks to the Wayve team, who taught me how to effectively structure my code._

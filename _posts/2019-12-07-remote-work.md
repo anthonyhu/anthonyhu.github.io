@@ -55,3 +55,5 @@ Last point: as the modification are automatically transferred to the remote mach
 on the remote machine directly (even though all the files are the same, the git diff will be different as .git is not synchronised). 
 First do `git reset --hard` (to clean branch) and `git clean -fd` (to remove all untracked files). Only then can we
 safely `git pull` on the remote machine.
+
+-----

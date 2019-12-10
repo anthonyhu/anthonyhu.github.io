@@ -1,7 +1,4 @@
 <footer class="site-footer clearfix" role="contentinfo">
-<div class="site-footer--primary clearfix">
-  <small><p class="site-footer--copyright">&copy; {{ site.time | date: "%Y" }} Anthony Hu. All rights reserved.</p></small>
-</div>
 
 <div class="site-footer--secondary">
   <ul class="site-footer--icons list-inline">
@@ -15,12 +12,19 @@
         {% include icons/github.svg %}
       </a>
     </li>
-    <li class="site-footer--icons__item">
+  </ul>
+</div>
+
+<div class="site-footer--primary clearfix">
+  <div class="site-footer--copyright"><small>&copy; {{ site.time | date: "%Y" }} Anthony Hu. All rights reserved.</small></div>
+</div>
+</footer>
+
+
+<script>/* <li class="site-footer--icons__item">
       <a class="site-footer--icons__anchor site-footer--icons__icon site-footer--icons__rss" href="/atom.xml" title="Subscribe to my RSS feed">
         {% include icons/rss.svg %}
         <span class="visuallyhidden">RSS Feed</span>
       </a>
     </li>
-  </ul>
-</div>
-</footer>
+*/</script>

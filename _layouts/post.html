@@ -6,6 +6,28 @@ layout: default
   <h1 class="post-title">{{ page.title }}</h1>
   <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">{{ page.date | date: "%-d %B, %Y" }}</time>
   {{ content }}
+
+  <!-- Share on Twitter/Github -->
+  <div role="contentinfo">
+    <ul class="site-share list-inline">
+      <li class="site-footer--icons__item">
+        <a class="site-footer--icons__anchor site-footer--icons__icon site-footer--icons__twitter"
+           href="https://twitter.com/intent/tweet?url={{ site.url }}{{ page.url }}&text={{ page.title }}&via=hu_anth"
+   target="_blank">
+          {% include icons/twitter.svg %}
+          <span class="site-footer--icons--title site-footer--icons__twitter">Tweet</span>
+        </a>
+      </li>
+      <li class="site-footer--icons__item">
+        <a class="site-footer--icons__anchor site-footer--icons__icon site-footer--icons__github" href={{ page.github }}>
+          {% include icons/github.svg %}
+          <span class="site-footer--icons--title site-footer--icons__github">Git</span>
+        </a>
+      </li>
+    </ul>
+    <!-- Bottom space for the text -->
+    <p style="height: 1px"></p>
+  </div>
 </article>
 
 {% if site.related_posts != empty %}
