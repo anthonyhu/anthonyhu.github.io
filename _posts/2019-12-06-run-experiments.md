@@ -3,6 +3,7 @@ layout: post
 title: How to run and organise experiments
 permalink: run-experiments
 comments: true
+github: https://github.com/anthonyhu/vision
 ---
 
 Each experiment we run must be fully specified in a config file. See the following example for CIFAR10:

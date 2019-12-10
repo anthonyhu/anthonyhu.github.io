@@ -3,6 +3,7 @@ layout: post
 title: Remote work
 permalink: remote-work
 comments: true
+github: https://github.com/anthonyhu/vision
 ---
 
 Most of the time, we code on our personal machine (that might not have a GPU), and run experiments on remote servers. 

@@ -3,6 +3,7 @@ layout: post
 title: Python environment
 permalink: python-environment
 comments: true
+github: https://github.com/anthonyhu/vision
 ---
 
 Setting a python environment is great to: 1) share code with others and 2) work on multiple machines. It ensures 
