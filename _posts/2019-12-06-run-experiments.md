@@ -6,7 +6,8 @@ comments: true
 github: https://github.com/anthonyhu/ml-research
 ---
 
-Each experiment we run must be fully specified in a config file. See the following example for CIFAR10:
+Each experiment we run must be fully specified in a config file. See the following example for 
+[CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html):
 
 ```yaml
 output_path: '/tmp/'
@@ -53,7 +54,7 @@ weight_decay: 0.0001
 
 We often find ourselves strugging to rerun an experiment because the code has changed in-between. A simple solution is 
 to save the git hash of the commit associated to our experiment in the training session folder, i.e. 
-in `session_{machine}_{time}_{tag}/git_hash`. When we want to run a past
+in `session_{machine}_{time}_{tag}/git_hash` (this function is implemented in the general `Trainer` class). When we want to run a past
 experiment, or restore the weights of a trained session, we simply need to go back to that particular git hash using:
 
 ```bash

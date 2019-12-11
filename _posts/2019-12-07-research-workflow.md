@@ -16,8 +16,8 @@ into four sections, that can each be read independently depending on your needs.
 3. [Python environment]({% post_url 2019-12-07-python-environment%})
 4. [Remote work]({% post_url 2019-12-07-remote-work%})
 
-The most important section is __1. Code structure__ as it covers how to design a machine learning model in 
-PyTorch with a detailed example. Anyone who want to get started, or to better organise their codebase, should find this
+The most important section is __1. Code structure__ as it covers how to design machine learning code in 
+PyTorch, with a detailed example. Anyone who want to get started, or better organise their codebase, should find this
 section useful.
 
 The __remaining sections__ (2. Run experiments, 3. Python environment, 4. Remote work) should benefit those
@@ -28,8 +28,8 @@ remotely).
 
 ## 1. Code structure
 Quality code is essential for good research. We should aim at building a codebase that becomes increasingly richer while 
-remaining easy to use. We'll discuss the structure of a machine learning codebase in PyTorch, but it may be applicable 
-to other fields.
+remaining easy to use. We're going to discuss the structure of a machine learning codebase in PyTorch, but it may 
+be applicable to other fields.
 
 In machine learning, we first prepare the __data__, then define the __model architecture + loss__, and 
 finally __train__ the model. This is where we should focus our research efforts on.
@@ -37,13 +37,13 @@ finally __train__ the model. This is where we should focus our research efforts 
 _Everything else_ (monitoring metrics on tensorboard, saving/restoring model weights, printing log outputs etc.) should 
 only be implemented once, and reused across models. 
 
-We're going to implement a general `Trainer` class that contains all the training logic (i.e. what we called 
-_everything else_). Whenever we want to build a new model, we simply have to implement the data and model creation, and 
-to illustrate how straightforward it is, we'll go through a detailed example. 
+We're going to implement a general `Trainer` class that contains all the training logic (i.e.
+_everything else_). Whenever we want to build a new model, we simply need to inherit from `Trainer` and implement the 
+data and model creation. To illustrate how straightforward it is, we'll go through a detailed example shortly.
  
 ### 1.1. Trainer initialisation
-Let us go step by step in the init function of the general `Trainer` class. The only argument 
-to the trainer is the path to a config file, that contains all the training settings (batch size, number of workers, 
+First, let us go step by step in the init function of the general `Trainer` class. The only argument 
+of the trainer is the path to a config file, that contains all the training settings (batch size, number of workers, 
 learning rate etc.) and the hyperparameters of the model to easily reproduce experiments.
 
 #### Training session
@@ -52,15 +52,17 @@ learning rate etc.) and the hyperparameters of the model to easily reproduce exp
 self.session_name = None
 self.initialise_session()
 
+# Monitor training with tensorboard
 self.tensorboard = SummaryWriter(self.session_name)
 # Use the gpu if available
 self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
 ```
 
-The name of the folder follows the format `session_{machine}_{time}_{tag}`, with the tag (contained in the config file) 
+A new folder will be created each time an experiment is ran. The name of this folder follows the format
+ `session_{machine}_{time}_{tag}`, with the tag (contained in the config file) 
 specifying the name of the experiment. This folder will contain: a copy of the config file used 
 to create the training session, the checkpoints of the model/optimiser, the tensorboard 
-file and a .txt log file with all the terminal outputs.
+file and a .txt log file saving all the terminal outputs.
 
 #### Data
 ```python
@@ -80,7 +82,7 @@ self.model.to(self.device)
 
 #### Loss
 ```python
-# Create the model loss function
+# Instantiate the loss function
 self.loss_fn = None
 self.create_loss()
 ```
@@ -102,35 +104,35 @@ self.create_metrics()
 
 For each new project, we simply need to implement the abstract methods `self.create_data`, `self.create_model`, 
 `self.create_loss`, `self.create_optimiser` and `self.create_metrics`. The general `Trainer` class will handle 
-everything else. We will shortly show an example implementation on CIFAR10, a classification dataset of tiny 32x32 
-images.
+everything else. We will shortly show an example implementation on [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html), 
+a classification dataset of tiny 32x32 images.
 
 ### 1.2. Train step
-Now let us see how the model computes one training step. This is the function `Trainer.train_step()`.
+Now let us see how the model computes one training step. This is the method `Trainer.train_step()`:
 ```python
-# Fetch a training batch. `batch` is a dictionary containing all the inputs 
-# and labels.
-batch = self._get_next_batch()
-# Cast the batch to gpu
-self.preprocess_batch(batch)
-
-# Forward pass
-output = self.forward_model(batch)
-loss = self.forward_loss(batch, output)
-
-# Backward pass
-self.optimiser.zero_grad()
-loss.backward()
-self.optimiser.step()
-
-# Print a log output to monitor training
-if self.global_step % self.config.print_iterations == 0:
-    self.print_log(loss)
-    self.tensorboard.add_scalar('train/loss', loss.item(), self.global_step)
-
-# Visualise
-if self.global_step % self.config.vis_iterations == 0:
-    self.visualise(batch, output, 'train')
+def train_step(self):
+    # Fetch a training batch. `batch` is a dictionary containing all the inputs and labels.
+    batch = self._get_next_batch()
+    # Cast the batch to gpu
+    self.preprocess_batch(batch)
+    
+    # Forward pass
+    output = self.forward_model(batch)
+    loss = self.forward_loss(batch, output)
+    
+    # Backward pass
+    self.optimiser.zero_grad()
+    loss.backward()
+    self.optimiser.step()
+    
+    # Print a log output to the terminal, and save loss on tensorboard.
+    if self.global_step % self.config.print_iterations == 0:
+        self.print_log(loss)
+        self.tensorboard.add_scalar('train/loss', loss.item(), self.global_step)
+    
+    # Visualisation
+    if self.global_step % self.config.vis_iterations == 0:
+        self.visualise(batch, output, 'train')
 ```
 
 The log output looks like:
@@ -140,16 +142,17 @@ Iteration  100/10000 | examples/s: 7785.4 | loss: 1.3832 | time elapsed: 00h00m0
 Fetch data time: 2ms, model update time: 7ms
 ```
 
-We monitor how long data preparation takes (if it's too slow, we might need more workers), here 2ms, and how much time
-a single update takes, here 7ms. Optimising these two values will result in an overall lower training time (indicated
+We monitor how long data preparation takes (if it's too slow, we might need more workers -- here 2ms), and how much time
+a single model update takes (here 7ms). Optimising these two values will result in an overall lower training time (indicated
 by 'time left'). 
 
-The `train_step` function is very general and work with any input `batch`, which is a Python dictionary containing the
-inputs of the model as well as the labels (for supervised learning) given by the PyTorch DataLoader. 
+The `train_step` function is very general and work with any input `batch`: a Python dictionary containing the
+inputs of the model as well as the labels (for supervised learning). They are created by the PyTorch DataLoader
+`self.train_dataloader`.
 
 ### 1.3 Training the model
 The main method of the trainer is `Trainer.train`: it optimises the model, outputs the metrics and visualisation, 
-and saves checkpoint during training.
+and saves checkpoint regularly.
 
 ```python
 def train(self):
@@ -161,6 +164,7 @@ def train(self):
         self.train_step()
 
         if self.global_step % self.config.val_iterations == 0:
+            # Evaluate the model on the validation set
             score = self.test()
 
             if score > self.best_score:
@@ -170,16 +174,18 @@ def train(self):
 
 ### 1.4. Example
 In practice, simply fork my [repository]({{ page.github }}) 
-and implement the abstract methods of the trainer. The repository contains an example that trains a CIFAR10 
+and implement the abstract methods of the trainer. For illustration, the repository contains an example that trains a CIFAR10 
 model with only a few lines of code:
 
 ```python
 # Inherit from the general `Trainer` class
 class CifarTrainer(Trainer):
+    # Implement all the abstract classes.
     def create_data(self):
+        # Load input 32x32 image and corresponding label.
         self.train_dataset = CifarDataset(mode='train')
         self.val_dataset = CifarDataset(mode='val')
-
+    
         self.train_dataloader = DataLoader(
             self.train_dataset, batch_size=self.config.batch_size, 
             num_workers=self.config.n_workers, shuffle=True)
@@ -188,6 +194,7 @@ class CifarTrainer(Trainer):
             num_workers=self.config.n_workers, shuffle=False)
 
     def create_model(self):
+        # A simple convolutional net.
         self.model = CifarModel()
 
     def create_loss(self):
@@ -196,10 +203,12 @@ class CifarTrainer(Trainer):
     def create_optimiser(self):
         parameters_with_grad = \
             filter(lambda p: p.requires_grad, self.model.parameters())
+        # Use an Adam optimiser with L2 regularisation.
         self.optimiser = Adam(parameters_with_grad, lr=self.config.learning_rate, 
                               weight_decay=self.config.weight_decay)
 
     def create_metrics(self):
+        # Monitor the accuracy of our model (percentage of correctly classified images).
         self.train_metrics = AccuracyMetrics()
         self.val_metrics = AccuracyMetrics()
 
@@ -210,6 +219,7 @@ class CifarTrainer(Trainer):
         return self.loss_fn(output, batch['label'])
 
     def visualise(self, batch, output, mode):
+        # Visualise the input images to our model.
         self.tensorboard.add_images(mode + '/image', batch['image'], 
                                     self.global_step)
 ```
