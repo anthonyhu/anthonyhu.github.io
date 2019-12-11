@@ -7,21 +7,21 @@
 /* Applies to all code blocks */
 code,
 pre {
-  font-family: Menlo, Monaco, "Courier New", monospace;
+  font-family: Consolas, Liberation Mono, Courier, monospace, Menlo, Monaco;
 }
 
 /* Inline code, no highlight */
 code {
   padding: .3em .3em;
   font-size: 85%;
-  color: #bf616a;
+  color: #b31d28;
   background-color: #f9f9f9;
   border-radius: 3px;
 }
 
 /* Inline code, highlight */
 code.highlight {
-  color: #515151;
+  color: #292f34;
 }
 
 /* Block code, no highlight [background] */
@@ -41,6 +41,7 @@ pre code {
 /* Block code, highlight */
 // Pygments via Jekyll
 .highlight {
+  color: #292f34;
   padding: 0.4rem;
   margin-bottom: 0.2rem;
   font-size: .8rem;
