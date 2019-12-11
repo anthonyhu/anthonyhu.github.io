@@ -3,7 +3,7 @@ layout: post
 title: How to run and organise experiments
 permalink: run-experiments
 comments: true
-github: https://github.com/anthonyhu/vision
+github: https://github.com/anthonyhu/ml-research
 ---
 
 Each experiment we run must be fully specified in a config file. See the following example for CIFAR10:
@@ -30,7 +30,7 @@ weight_decay: 0.0001
 ```
 
 In our codebase, we create a folder named `experiments` where we store all the config files (see the accompanying
-[repository](https://github.com/anthonyhu/vision)). Also, it is useful to 
+[repository]({{ page.github }})). Also, it is useful to 
 create a debug config file, that runs a full training session in order to catch any bug. For example, here is the
 content of `experiments/debug_cifar.yml`:
 

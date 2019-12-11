@@ -3,7 +3,7 @@ layout: post
 title: Research workflow
 permalink: research-workflow
 comments: true
-github: https://github.com/anthonyhu/vision
+github: https://github.com/anthonyhu/ml-research
 ---
 <p align='center'><img src='/img/research-workflow.jpg' alt='research-workflow'/></p>
 
