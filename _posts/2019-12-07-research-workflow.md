@@ -16,9 +16,8 @@ into four sections, that can each be read independently depending on your needs.
 3. [Python environment]({% post_url 2019-12-07-python-environment%})
 4. [Remote work]({% post_url 2019-12-07-remote-work%})
 
-The most important section is __1. Code structure__ as it covers how to design machine learning code in 
-PyTorch, with a detailed example. Anyone who want to get started, or better organise their codebase, should find this
-section useful.
+The most important section is __1. Code structure__ as it covers how to design machine learning code, with a detailed 
+example. Anyone who want to get started, or better organise their codebase, should find this section useful.
 
 The __remaining sections__ (2. Run experiments, 3. Python environment, 4. Remote work) should benefit those
 who work day-to-day on machine learning research (e.g. run and organise experiments on multiple machines, while working
@@ -28,93 +27,92 @@ remotely).
 
 ## 1. Code structure
 Quality code is essential for good research. We should aim at building a codebase that becomes increasingly richer while 
-remaining easy to use. We're going to discuss the structure of a machine learning codebase in PyTorch, but it may 
-be applicable to other fields.
+remaining easy to use. We're going to discuss the structure of a machine learning codebase in 
+_PyTorch_, but it's also
+applicable to other frameworks (_TensorFlow, Keras, Caffe_..).
 
 In machine learning, we first prepare the __data__, then define the __model architecture + loss__, and 
 finally __train__ the model. This is where we should focus our research efforts on.
 
 _Everything else_ (monitoring metrics on tensorboard, saving/restoring model weights, printing log outputs etc.) should 
-only be implemented once, and reused across models. 
+only be implemented once, and reused across projects. 
 
 We're going to implement a general `Trainer` class that contains all the training logic (i.e.
-_everything else_). Whenever we want to build a new model, we simply need to inherit from `Trainer` and implement the 
-data and model creation. To illustrate how straightforward it is, we'll go through a detailed example shortly.
+_everything else_). Whenever we want to start a new machine learning project, we simply need to inherit from `Trainer` 
+and implement the data and model creation. To illustrate how straightforward it is, we'll go through a detailed example 
+shortly.
  
 ### 1.1. Trainer initialisation
-First, let us go step by step in the init function of the general `Trainer` class. The only argument 
-of the trainer is the path to a config file, that contains all the training settings (batch size, number of workers, 
-learning rate etc.) and the hyperparameters of the model to easily reproduce experiments.
+First, let's go step by step in the init function of the general `Trainer` class. The only argument 
+of the trainer is the path to a __config file__ (more details on the config file in 
+[Section 2]({% post_url 2019-12-06-run-experiments%})), that contains all the training settings (batch size, 
+number of workers, learning rate etc.) and the hyperparameters of the model.
 
-#### Training session
 ```python
-# Initialise the training session by creating a new folder named `self.session_name`
-self.session_name = None
-self.initialise_session()
-
-# Monitor training with tensorboard
-self.tensorboard = SummaryWriter(self.session_name)
-# Use the gpu if available
-self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
+class Trainer:
+    def __init__(self, config):
+        self.config = config
+        self.session_name = None
+        # Initialise the training session by creating a new folder named `self.session_name`
+        self.initialise_session()
+        
+        # Monitor training with tensorboard
+        self.tensorboard = SummaryWriter(self.session_name)
+        # Use the gpu if available
+        self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
 ```
 
 A new folder will be created each time an experiment is ran. The name of this folder follows the format
- `session_{machine}_{time}_{tag}`, with the tag (contained in the config file) 
-specifying the name of the experiment. This folder will contain: a copy of the config file used 
-to create the training session, the checkpoints of the model/optimiser, the tensorboard 
-file and a .txt log file saving all the terminal outputs.
+ `session_{machine_name}_{time}_{tag}`, with the tag (contained in the config file) 
+specifying the name of the experiment (e.g. `baseline`). 
 
-#### Data
-```python
-self.train_dataset, self.val_dataset = None, None
-self.train_dataloader, self.val_dataloader = None, None
-# Abstract method that initialises the PyTorch Dataset and DataLoader classes 
-self.create_data()
-```
+This folder will contain: a copy of the config file used 
+to create the training session (to easily reproduce experiments), checkpoints of the model/optimiser (to restore weights), a tensorboard 
+file (to monitor metrics) and a .txt log file saving all the terminal outputs.
 
-#### Model
 ```python
-# Build the neural network and move it to the desired device
-self.model = None
-self.create_model()
-self.model.to(self.device)
-```
-
-#### Loss
-```python
-# Instantiate the loss function
-self.loss_fn = None
-self.create_loss()
-```
-
-#### Optimiser
-```python
-# Initialise the optimiser
-self.optimiser = None
-self.create_optimiser()
-```
-
-#### Metrics
-```python
-# Metrics we monitor during training on both the train and validation sets
-self.train_metrics = None
-self.val_metrics = None
-self.create_metrics()
+        # Data
+        self.train_dataset, self.val_dataset = None, None
+        self.train_dataloader, self.val_dataloader = None, None
+        # Abstract method that initialises the PyTorch Dataset and DataLoader classes 
+        self.create_data()
+        
+        # Model
+        self.model = None
+        # Build the neural network and move it to the desired device
+        self.create_model()
+        self.model.to(self.device)
+        
+        # Loss
+        self.loss_fn = None
+        # Instantiate the loss function
+        self.create_loss()
+        
+        # Optimiser
+        self.optimiser = None
+        # Initialise the optimiser
+        self.create_optimiser()
+        
+        # Metrics
+        self.train_metrics = None
+        self.val_metrics = None
+        # What we monitor during training on both the train and validation sets
+        self.create_metrics()
 ```
 
 For each new project, we simply need to implement the abstract methods `self.create_data`, `self.create_model`, 
 `self.create_loss`, `self.create_optimiser` and `self.create_metrics`. The general `Trainer` class will handle 
-everything else. We will shortly show an example implementation on [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html), 
+everything else. We will shortly show (in [subsection 1.4](#14-example)) an example implementation on [CIFAR10](https://www.cs.toronto.edu/~kriz/cifar.html), 
 a classification dataset of tiny 32x32 images.
 
 ### 1.2. Train step
-Now let us see how the model computes one training step. This is the method `Trainer.train_step()`:
+Now let's see how the trainer computes one training step. This is the method `Trainer.train_step`:
 ```python
 def train_step(self):
     # Fetch a training batch. `batch` is a dictionary containing all the inputs and labels.
     batch = self._get_next_batch()
-    # Cast the batch to gpu
-    self.preprocess_batch(batch)
+    # Cast the batch to the correct device
+    self.cast_to_device(batch)
     
     # Forward pass
     output = self.forward_model(batch)
@@ -126,39 +124,33 @@ def train_step(self):
     self.optimiser.step()
     
     # Print a log output to the terminal, and save loss on tensorboard.
-    if self.global_step % self.config.print_iterations == 0:
-        self.print_log(loss)
-        self.tensorboard.add_scalar('train/loss', loss.item(), self.global_step)
-    
+    self.print_log(loss)
+    self.tensorboard.add_scalar('train/loss', loss.item(), self.global_step)
+
     # Visualisation
-    if self.global_step % self.config.vis_iterations == 0:
-        self.visualise(batch, output, 'train')
+    self.visualise(batch, output, 'train')
 ```
 
-The log output looks like:
+The log output printed in the terminal looks like:
 ```
 Iteration  100/10000 | examples/s: 7785.4 | loss: 1.3832 | time elapsed: 00h00m02s 
                      | time left: 00h04m46s
 Fetch data time: 2ms, model update time: 7ms
 ```
 
-We monitor how long data preparation takes (if it's too slow, we might need more workers -- here 2ms), and how much time
-a single model update takes (here 7ms). Optimising these two values will result in an overall lower training time (indicated
+We monitor how long fetching one batch takes (2ms) -- if it's too slow, we might need more workers -- and how long
+a single model update takes (7ms). Optimising these two values will result in an overall lower training time (indicated
 by 'time left'). 
 
-The `train_step` function is very general and work with any input `batch`: a Python dictionary containing the
-inputs of the model as well as the labels (for supervised learning). They are created by the PyTorch DataLoader
-`self.train_dataloader`.
+The `train_step` method is very general and operates with any input `batch`: a python dictionary, 
+created by the data loader `self.train_dataloader`, containing the inputs and labels of the model.
 
 ### 1.3 Training the model
-The main method of the trainer is `Trainer.train`: it optimises the model, outputs the metrics and visualisation, 
-and saves checkpoint regularly.
+The main method of the trainer is `Trainer.train`: it optimises and evaluates the model, outputs the metrics and 
+visualisation, and saves checkpoints regularly.
 
 ```python
 def train(self):
-    # Set the model in train mode
-    self.model.train()
-
     while self.global_step < self.config.n_iterations:
         self.global_step += 1
         self.train_step()
@@ -182,16 +174,15 @@ model with only a few lines of code:
 class CifarTrainer(Trainer):
     # Implement all the abstract classes.
     def create_data(self):
-        # Load input 32x32 image and corresponding label.
+        # Load dataset containing input 32x32 images and corresponding labels.
         self.train_dataset = CifarDataset(mode='train')
         self.val_dataset = CifarDataset(mode='val')
-    
-        self.train_dataloader = DataLoader(
-            self.train_dataset, batch_size=self.config.batch_size, 
-            num_workers=self.config.n_workers, shuffle=True)
-        self.val_dataloader = DataLoader(
-            self.val_dataset, batch_size=self.config.batch_size,
-            num_workers=self.config.n_workers, shuffle=False)
+        
+        # Create batches using DataLoader
+        self.train_dataloader = DataLoader(self.train_dataset, self.config.batch_size, 
+                                           num_workers=self.config.n_workers, shuffle=True)
+        self.val_dataloader = DataLoader(self.val_dataset, self.config.batch_size, 
+                                         num_workers=self.config.n_workers, shuffle=False)
 
     def create_model(self):
         # A simple convolutional net.
@@ -201,10 +192,11 @@ class CifarTrainer(Trainer):
         self.loss_fn = nn.CrossEntropyLoss()
 
     def create_optimiser(self):
+        # Parameters of the model that are optimisable.
         parameters_with_grad = \
             filter(lambda p: p.requires_grad, self.model.parameters())
         # Use an Adam optimiser with L2 regularisation.
-        self.optimiser = Adam(parameters_with_grad, lr=self.config.learning_rate, 
+        self.optimiser = Adam(parameters_with_grad, self.config.learning_rate, 
                               weight_decay=self.config.weight_decay)
 
     def create_metrics(self):
@@ -235,10 +227,6 @@ Iteration  200/10000 | examples/s: 7326.7 | loss: 1.3379 | time elapsed: 00h00m0
                      | time left: 00h03m58s
 Fetch data time: 2ms, model update time: 9ms
 
-Iteration  300/10000 | examples/s: 7199.7 | loss: 1.1732 | time elapsed: 00h00m06s 
-                     | time left: 00h03m42s
-Fetch data time: 3ms, model update time: 10ms
-
 ----------------------------------------------------------------------------------
 Validation
 ----------------------------------------------------------------------------------
@@ -253,18 +241,17 @@ New best score: -inf -> 0.596
 Model saved to: /path/to/experiment/checkpoint
 
 -----------------------------------------------------------------------------------
-Iteration  400/10000 | examples/s: 5816.1 | loss: 1.0277 | time elapsed: 00h00m09s 
+Iteration  300/10000 | examples/s: 5816.1 | loss: 1.0277 | time elapsed: 00h00m09s 
                      | time left: 00h03m39s
 Fetch data time: 2ms, model update time: 11ms
 
-Iteration  500/10000 | examples/s: 5675.3 | loss: 1.0342 | time elapsed: 00h00m11s 
-                     | time left: 00h03m32s
-Fetch data time: 3ms, model update time: 8ms
 ...
 ```
 
-If the training is interrupted, it can be resumed by pointing to the path of the experiment:
-`python run_training.py --restore /path/to/experiment/`.
+If the training is interrupted, it can be resumed by pointing to the path of the experiment (the folder 
+whose name is `self.session_name` that was created in the init function of the `Trainer`). Running
+`python run_training.py --restore /path/to/experiment/` will restore the weights of the model and optimiser, and
+continue training where we left it.
 
 Next we will cover how to run [reproducible experiments]({% post_url 2019-12-06-run-experiments%}), 
 how to setup a reliable [python environment]({% post_url 2019-12-07-python-environment%}), and how to productively

@@ -9,14 +9,14 @@ github: https://github.com/anthonyhu/ml-research
 Setting a python environment is great to: 1) share code with others and 2) work on multiple machines. It ensures 
 that every machine, and every collaborator runs the same code, which is a good way to stay sane.
 
-Use conda to create a custom environment for the project. 
+Use conda to create a custom environment for your project. 
 
 1. Install [miniconda](https://docs.conda.io/en/latest/miniconda.html), which is a lightweight installer of conda.
-2. At the root of your project repository, create an `environment.yml` file that contains all the dependencies of your
+2. In your project repository, create an `environment.yml` file that contains all the dependencies of your
 project (example below).
-3. In this repository, run `conda env create` to create a conda environment as specified in the `environment.yml` file.
-4. Every time we update `environment.yml` (add/delete packages), simply run the command `conda env update` to update
-the associated conda environment.
+3. From this repository, run `conda env create` to create a conda environment as specified in the `environment.yml` file.
+4. Every time we update our environment (add/delete packages), run the command `conda env update` to update
+it.
 
 
 Here is an example of an `environment.yml` file.
@@ -38,9 +38,9 @@ dependencies:
 ```
 
 That's it. Whenever we want to share our code with others, we simply point them to the github repository and 
-they'll be able to generate the same python environment to run our model.
+they'll be able to generate the same python environment to run the model with `conda env create`.
 
-Also, [autoenv](https://github.com/inishchith/autoenv) is a handy tool to automatically activate the conda environment
-whenever we navigate to the project folder.
+(Also, [autoenv](https://github.com/inishchith/autoenv) is a handy tool to automatically activate the conda environment
+whenever we navigate to the project folder.)
 
 -----
