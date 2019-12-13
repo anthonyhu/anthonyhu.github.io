@@ -6,12 +6,17 @@
   padding-top:    1rem;
   padding-bottom: 1rem;
   margin-bottom: 3rem;
+  hr{
+    padding: 0px;
+    margin: 4px;
+  }
 }
 
 .masthead-title {
   margin-top: 0;
   margin-bottom: 0;
   font-size: 2rem;
+  font-weight: 200;
   color: #505050;
 
   a {
@@ -20,14 +25,14 @@
 
   small {
     font-size: 60%;
-    font-weight: 400;
+    font-weight: 150;
     color: #c0c0c0;
     letter-spacing: 0;
   }
 
   small-list {
     font-size: 60%;
-    font-weight: 550;
+    font-weight: 150;
     letter-spacing: 0;
   }
 }
