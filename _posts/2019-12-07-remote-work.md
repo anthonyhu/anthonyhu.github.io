@@ -8,48 +8,46 @@ github: https://github.com/anthonyhu/ml-research
 
 Most of the time, we code on our personal computer and run experiments on remote servers. As using git and pushing/pulling
 all the time is tedious, I'll show you a better way to:
-1. Automatically sync local change with the remote machine.
-2. Debug code using the interpreter of the remote machine on an IDE like _PyCharm_.
+1. Automatically sync local change with your remote machine.
+2. Debug code using the interpreter of your remote machine on an IDE like _PyCharm_.
 
 
 ### SSH configuration
-First, let's setup the ssh configuration on our personal computer so that we can connect to a remote server with a simple 
-command like `ssh direwolf`.
-Here is my `~/.ssh/config` file:
+First, let's setup the ssh configuration on your personal computer so that you can connect to a remote server with a simple 
+command like `ssh <machine_name>`. Modify your `~/.ssh/config` file as such:
 
 ```
-# First log into the Cambridge network
-Host cued
-  HostName         gate.eng.cam.ac.uk
-  User             ah2029
+# First log into your internal network (optional)
+Host <network_name>
+  HostName         <network_hostname>
+  User             <username>
 
-# Then to my remote machine.
-Host direwolf
-  HostName         direwolf
-  User             anthonyhu
-  ProxyCommand     ssh -W %h:%p cued
+# Then to your remote machine.
+Host <machine_name>
+  HostName         <machine_hostname>
+  User             <username>
+  ProxyCommand     ssh -W %h:%p <network_name>   # (optional)
   LocalForward     6006 127.0.0.1:6006
   LocalForward     8888 127.0.0.1:8888
 ```
 
-The two `LocalForward` lines forward the port `6006` and `8888` of the remote server to our personal machine. For example,
+The two `LocalForward` lines forward the port `6006` and `8888` of the remote server to your personal machine. For example,
 the port `6006` can be used to run tensorboard on the remote machine, and the port `8888` to run jupyter notebook.
-We can then access tensorboard and jupyter on our personal machine on `http://localhost:6006` and `http://localhost:8888`,
-as if we were on the remote server.
+You can then access tensorboard and jupyter on your personal machine on `http://localhost:6006` and `http://localhost:8888`,
+as if you were on the remote server.
 
 
 ### Remote interpreter
-Now, let us setup PyCharm to use a remote interpreter, i.e. so we can code locally on our personal machine, while 
+Now, let's setup PyCharm to use a remote interpreter, i.e. so we can code locally on our personal machine, while 
 running/debugging scripts on a remote machine, which is very handy if we want to test GPU or multi-GPU code for 
 example. We need PyCharm Professional to do that, which is available freely [for students](https://www.jetbrains.com/student/). 
 
 1. Open your project repository on PyCharm.
 2. Setup the remote interpreter. PyCharm → Preferences → Project Interpreter → Click on cogwheel → Add → SSH Interpreter.
-3. Select 'New server configuration' and type: Host: `direwolf` Username: `anthonyhu` (replace with your hostname and username)
+3. Select 'New server configuration' and type: Host: \<machine_name>, Username: \<username>
 followed by your password.
-4. Specify the path of the interpreter. (To get the path, go to your remote machine, 
-activate your conda environment and type `which python`.
-The output will look like `/home/anthonyhu/miniconda3/envs/ml-research/bin/python`.)
+4. Specify the path of the remote interpreter. (To get the path, ssh into your remote machine, 
+activate your conda environment and type `which python`)
 5. Specify the matching github repository on the remote machine, i.e. the path of the project repository on the remote machine.
 
 All good! Now any change applied locally will also happen on the remote machine. We can now debug code/develop 

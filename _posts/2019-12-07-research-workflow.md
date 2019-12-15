@@ -62,7 +62,7 @@ class Trainer:
         self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
 ```
 
-A new folder will be created each time an experiment is ran. The name of this folder follows the format
+A new folder will be created each time an experiment is run. The name of this folder follows the format
  `session_{machine_name}_{time}_{tag}`, with the tag (contained in the config file) 
 specifying the name of the experiment (e.g. `baseline`). 
 
@@ -258,4 +258,4 @@ how to setup a reliable [python environment]({% post_url 2019-12-07-python-envir
 [work remotely]({% post_url 2019-12-07-remote-work%}).
 
 -----
-_Big thanks to the Wayve team, who taught me how to effectively structure my code._
+_Big thanks to the [Wayve team](https://wayve.ai/), who taught me how to effectively structure my code._
