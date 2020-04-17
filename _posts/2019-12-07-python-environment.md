@@ -39,8 +39,4 @@ dependencies:
 
 That's it. Whenever we want to share our code with others, we simply point them to the github repository and 
 they'll be able to generate the same python environment to run the model with `conda env create`.
-
-(Also, [autoenv](https://github.com/inishchith/autoenv) is a handy tool to automatically activate the conda environment
-whenever we navigate to the project folder.)
-
 -----
