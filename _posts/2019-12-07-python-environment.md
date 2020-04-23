@@ -39,4 +39,5 @@ dependencies:
 
 That's it. Whenever we want to share our code with others, we simply point them to the github repository and 
 they'll be able to generate the same python environment to run the model with `conda env create`.
+
 -----

@@ -53,7 +53,7 @@ class Trainer:
     def __init__(self, config):
         self.config = config
         self.session_name = None
-        # Initialise the training session by creating a new folder named `self.session_name`
+        # Initialise the training session by creating a new folder
         self.initialise_session()
         
         # Monitor training with tensorboard
@@ -62,7 +62,7 @@ class Trainer:
         self.device = torch.device('cuda') if self.config.gpu else torch.device('cpu')
 ```
 
-A new folder will be created each time an experiment is run. The name of this folder follows the format
+A __new folder__ will be created each time an experiment is run. The name of this folder follows the format
  `session_{machine_name}_{time}_{tag}`, with the tag (contained in the config file) 
 specifying the name of the experiment (e.g. `baseline`). 
 
@@ -74,7 +74,7 @@ file (to monitor metrics) and a .txt log file saving all the terminal outputs.
         # Data
         self.train_dataset, self.val_dataset = None, None
         self.train_dataloader, self.val_dataloader = None, None
-        # Abstract method that initialises the PyTorch Dataset and DataLoader classes 
+        # Initialise the PyTorch Dataset and DataLoader classes 
         self.create_data()
         
         # Model
@@ -138,7 +138,7 @@ Iteration  100/10000 | examples/s: 7785.4 | loss: 1.3832 | time elapsed: 00h00m0
 Fetch data time: 2ms, model update time: 7ms
 ```
 
-We monitor how long fetching one batch takes (2ms) -- if it's too slow, we might need more workers -- and how long
+We monitor how long fetching one data batch takes (2ms) -- if it's too slow, we might need more workers -- and how long
 a single model update takes (7ms). Optimising these two values will result in an overall lower training time (indicated
 by 'time left'). 
 
@@ -157,7 +157,7 @@ def train(self):
 
         if self.global_step % self.config.val_iterations == 0:
             # Evaluate the model on the validation set
-            score = self.test()
+            score = self.validate()
 
             if score > self.best_score:
                 self.best_score = score

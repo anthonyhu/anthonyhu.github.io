@@ -8,8 +8,8 @@ github: https://github.com/anthonyhu/ml-research
 
 Most of the time, we code on our personal computer and run experiments on remote servers. As using git and pushing/pulling
 all the time is tedious, I'll show you a better way to:
-1. Automatically sync local change with your remote machine.
-2. Debug code using the interpreter of your remote machine on an IDE like _PyCharm_.
+1. Automatically sync local changes with your remote machine.
+2. Debug code using the Python interpreter of your remote machine on an IDE like _PyCharm_.
 
 
 ### SSH configuration
@@ -26,7 +26,7 @@ Host <network_name>
 Host <machine_name>
   HostName         <machine_hostname>
   User             <username>
-  ProxyCommand     ssh -W %h:%p <network_name>   # (optional)
+  ProxyCommand     ssh -W %h:%p <network_name>   # (optional, only if you've got an internal network)
   LocalForward     6006 127.0.0.1:6006
   LocalForward     8888 127.0.0.1:8888
 ```
@@ -43,7 +43,9 @@ running/debugging scripts on a remote machine, which is very handy if we want to
 example. We need PyCharm Professional to do that, which is available freely [for students](https://www.jetbrains.com/student/). 
 
 1. Open your project repository on PyCharm.
-2. Setup the remote interpreter. PyCharm → Preferences → Project Interpreter → Click on cogwheel → Add → SSH Interpreter.
+2. Setup the remote interpreter by clicking on: PyCharm (top left) → Preferences → Project Interpreter → Click on the
+cogwheel (top right) → Add → SSH 
+Interpreter.
 3. Select 'New server configuration' and type: Host: \<machine_name>, Username: \<username>
 followed by your password.
 4. Specify the path of the remote interpreter. (To get the path, ssh into your remote machine, 
