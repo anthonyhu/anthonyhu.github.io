@@ -28,6 +28,7 @@ plugins:
 # Navigation bar
 pages_list:
   Blog: '/posts'
+  Research: '/research'
   About: '/about'
 
 # Google Analytics ID
@@ -41,22 +42,22 @@ curriculum:
   - image: img/wayve.png
     title: Wayve
     info: 2019
-    description: "Computer Vision Intern Supervisor: Dr. Alex Kendall"
+    description: "Computer Vision Intern Supervisor: Alex Kendall"
     url: https://wayve.ai/
   - image: img/cambridge.png
     title: University of Cambridge
     info: 2018 - Present
-    description: "PhD student in Computer Vision Supervisor: Prof. Roberto Cipolla"
+    description: "PhD student in Computer Vision Supervisor: Roberto Cipolla"
     url: http://mi.eng.cam.ac.uk/Main/CVR
   - image: img/spotify.png
     title: Spotify
     info: 2017 - 2018
-    description: "Research Scientist Intern Supervisor: Dr. Jonathan Donier"
+    description: "Research Scientist Intern Supervisor: Jonathan Donier"
     url: https://www.spotify.com/
   - image: img/oxford.png
     title: University of Oxford
     info: 2016 - 2017
-    description: "MSc in Statistical Science Supervisor: Dr. Seth Flaxman"
+    description: "MSc in Statistical Science Supervisor: Seth Flaxman"
     url: https://www.stats.ox.ac.uk/
   - image: img/telecom.png
     title: Telecom Paris
