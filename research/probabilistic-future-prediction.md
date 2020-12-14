@@ -8,7 +8,7 @@ Anthony Hu &emsp; Fergal Cotter &emsp; Nikhil Mohan &emsp; Corina Gurau &emsp; A
 </center>
 <center>
 <b><a href="https://arxiv.org/pdf/2003.06409.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve
-.ai/blog/predicting-the-future">Blog</a> &emsp; &emsp; &emsp;<a href="https://www.youtube.com/watch?v=EwEfs2R4RIA">Video</a></b>
+.ai/blog/predicting-the-future">Blog</a> &emsp; &emsp; &emsp;<a href="https://youtu.be/ibRd_HucdWg">Video</a></b>
 </center>
 
 <br/>
