@@ -1,7 +1,7 @@
 ---
 layout: research
 title: "FIERY: Future Instance Prediction in Bird's-Eye View from Surround Monocular Cameras"
-authors: Anthony Hu, Zachary Murez, Nikhil Mohan, Sofía Dudas, Jeffrey Hawke, ‪Vijay Badrinarayanan, Roberto Cipolla, Alex Kendall
+authors: Anthony Hu, Zak Murez, Nikhil Mohan, Sofía Dudas, Jeffrey Hawke, ‪Vijay Badrinarayanan, Roberto Cipolla, Alex Kendall
 venue: preprint 2021
 thumbnail: thumbnails/fiery_thumbnail.png
 permalink: fiery
@@ -13,7 +13,7 @@ permalink: fiery
 <h1 class="page-title">FIERY: Future Instance Prediction in Bird's-Eye View <br>from Surround Monocular Cameras
 </h1>
 
-Anthony Hu &emsp; Zachary Murez &emsp; Nikhil Mohan &emsp; Sofía Dudas &emsp;
+Anthony Hu &emsp; Zak Murez &emsp; Nikhil Mohan &emsp; Sofía Dudas &emsp;
 <p>Jeffrey Hawke &emsp; ‪Vijay Badrinarayanan‬ &emsp; Roberto Cipolla &emsp; Alex Kendall</p>
 
 <p>Wayve, UK. University of Cambridge, UK.</p>
