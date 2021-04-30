@@ -37,6 +37,11 @@ google_analytics: UA-119899375-1
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
 disqus: "https-anthonyhu-github-io"
 
+# Research posts
+collections:
+  research:
+    output: true
+
 # About
 curriculum:
   - image: img/wayve.png
