@@ -2,7 +2,7 @@
 layout: research
 title: "FIERY: Future Instance Prediction in Bird's-Eye View from Surround Monocular Cameras"
 authors: Anthony Hu, Zak Murez, Nikhil Mohan, Sofía Dudas, Jeffrey Hawke, ‪Vijay Badrinarayanan, Roberto Cipolla, Alex Kendall
-venue: preprint 2021
+venue: ICCV 2021 (Oral)
 thumbnail: thumbnails/fiery_thumbnail.png
 permalink: fiery
 ---
