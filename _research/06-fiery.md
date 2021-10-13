@@ -17,7 +17,7 @@ Anthony Hu &emsp; Zak Murez &emsp; Nikhil Mohan &emsp; Sofía Dudas &emsp;
 <p>Jeffrey Hawke &emsp; ‪Vijay Badrinarayanan‬ &emsp; Roberto Cipolla &emsp; Alex Kendall</p>
 
 <p>Wayve, UK. University of Cambridge, UK.</p>
-<b><a href="https://openaccess.thecvf.com/content/ICCV2021/papers/Hu_FIERY_Future_Instance_Prediction_in_Birds-Eye_View_From_Surround_Monocular_ICCV_2021_paper.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve.ai/blog/fiery-future-instance-prediction-birds-eye-view/">
+<b><a href="https://arxiv.org/pdf/2104.10490.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve.ai/blog/fiery-future-instance-prediction-birds-eye-view/">
 Blog</a> &emsp; &emsp; &emsp;<a href="https://github.com/wayveai/fiery">Code</a></b>
 </center>
 
