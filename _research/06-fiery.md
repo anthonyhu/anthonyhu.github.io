@@ -16,7 +16,7 @@ permalink: fiery
 Anthony Hu &emsp; Zak Murez &emsp; Nikhil Mohan &emsp; Sofía Dudas &emsp;
 <p>Jeffrey Hawke &emsp; ‪Vijay Badrinarayanan‬ &emsp; Roberto Cipolla &emsp; Alex Kendall</p>
 
-<p>Wayve, UK. University of Cambridge, UK.</p>
+<p>Wayve, University of Cambridge</p>
 <b><a href="https://arxiv.org/pdf/2104.10490.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve.ai/blog/fiery-future-instance-prediction-birds-eye-view/">
 Blog</a> &emsp; &emsp; &emsp;<a href="https://github.com/wayveai/fiery">Code</a></b>
 </center>

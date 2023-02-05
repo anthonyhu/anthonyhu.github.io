@@ -2,7 +2,7 @@
 layout: research
 title: "ECLIPSE: Envisioning Cloud Induced Perturbations in Solar Energy"
 authors: Quentin Paletta, Anthony Hu, Guillaume Arbod and Joan Lasenby
-venue: preprint 2021
+venue: Applied Energy 2022
 thumbnail: thumbnails/eclipse_thumbnail.jpg
 permalink: eclipse
 ---
@@ -13,7 +13,7 @@ permalink: eclipse
 </h1>
 
 Quentin Paletta &emsp;Anthony Hu &emsp; Guillaume Arbod &emsp; Joan Lasenby
-<p>University of Cambridge, UK. ENGIE Lab CRIGEN, France.</p>
+<p>University of Cambridge, ENGIE Lab CRIGEN</p>
 </center>
 <center>
 <b><a href="https://arxiv.org/pdf/2104.12419.pdf">Paper</a></b>

@@ -14,7 +14,7 @@ Video Scene Understanding
 </h1>
 
 Anthony Hu &emsp; Fergal Cotter &emsp; Nikhil Mohan &emsp; Corina Gurau &emsp; Alex Kendall
-<p>Wayve, UK</p>
+<p>Wayve, University of Cambridge</p>
 </center>
 <center>
 <b><a href="https://arxiv.org/pdf/2003.06409.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve

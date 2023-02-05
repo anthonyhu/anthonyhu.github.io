@@ -11,7 +11,7 @@ permalink: structure-of-emotions
 </h1>
 
 Anthony Hu &emsp; Seth Flaxman
-<p>University of Oxford, UK</p>
+<p>University of Oxford</p>
 </center>
 <center>
 <b><a href="https://arxiv.org/pdf/1805.10205.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://youtu.be/KqxiDoUVsig">Video</a></b>

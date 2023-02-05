@@ -14,7 +14,7 @@ permalink: video-instance-embedding
 </h1>
 
 Anthony Hu &emsp; Alex Kendall &emsp; Roberto Cipolla
-<p>University of Cambridge, UK</p>
+<p>University of Cambridge</p>
 </center>
 <center>
 <b><a href="https://arxiv.org/pdf/1912.08969.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://youtu.be/dc-3meFF6z0">Video</a></b>

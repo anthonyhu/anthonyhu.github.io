@@ -46,28 +46,28 @@ collections:
 curriculum:
   - image: img/wayve.png
     title: Wayve
-    info: 2019
-    description: "Research Scientist Intern Supervisor: Alex Kendall"
+    info: 2019 - Present
+    description: "Applied Scientist"
     url: https://wayve.ai/
   - image: img/cambridge.png
     title: University of Cambridge
-    info: 2018 - Present
-    description: "PhD student in Computer Vision Supervisor: Roberto Cipolla"
+    info: 2018 - 2022
+    description: "PhD in Computer Vision"
     url: http://mi.eng.cam.ac.uk/Main/CVR
   - image: img/spotify.png
     title: Spotify
     info: 2017 - 2018
-    description: "Research Scientist Intern Supervisor: Jonathan Donier"
+    description: "Research Scientist Intern"
     url: https://www.spotify.com/
   - image: img/oxford.png
     title: University of Oxford
     info: 2016 - 2017
-    description: "MSc in Statistical Science Supervisor: Seth Flaxman"
+    description: "MSc in Statistical Science"
     url: https://www.stats.ox.ac.uk/
   - image: img/telecom.png
     title: Telecom Paris
     info: 2014-2017
-    description: Diplome d'Ingenieur - MEng
+    description: Diplôme d'Ingénieur
     url: https://www.telecom-paris.fr/
   - image: img/saint-louis.png
     title: Lycee Saint-Louis

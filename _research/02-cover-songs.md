@@ -11,7 +11,7 @@ permalink: cover-songs
 </h1>
 
 Marc Sarfati &emsp; Anthony Hu &emsp; Jonathan Donier
-<p>Spotify, UK</p>
+<p>Spotify</p>
 </center>
 <center>
 <b><a href="http://archives.ismir.net/ismir2019/paper/000028.pdf">Paper</a></b>
