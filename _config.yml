@@ -32,7 +32,7 @@ pages_list:
   About: '/about'
 
 # Google Analytics ID
-google_analytics: UA-119899375-1
+google_analytics: G-ZEX81SMNGH
 
 # Fill in your Disqus shortname (NOT the userid) if you want to support Disqus comments
 disqus: "https-anthonyhu-github-io"
