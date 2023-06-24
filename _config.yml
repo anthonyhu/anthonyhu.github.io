@@ -29,7 +29,7 @@ plugins:
 pages_list:
   Research: '/research'
   Blog posts: '/posts'
-  #About: '/about'
+  About: '/about'
 
 # Google Analytics ID
 google_analytics: G-ZEX81SMNGH
