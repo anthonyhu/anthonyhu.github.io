@@ -62,6 +62,9 @@ $black-light: #090909;
 $black: #000;
 
 $color-footer: $gray-dark;
+
+$color-email: #692123;
+$color-linkedin: #0077b5;
 $color-twitter: #1da1f2;
 $color-github: #171717;
 $color-rss: #ff6600;
@@ -171,6 +174,28 @@ $color-rss: #ff6600;
 
     .site-footer--icons--title {
       opacity: 1;
+    }
+  }
+}
+
+// Email
+.site-footer--icons__email {
+  color: $color-email;
+  &:hover,
+  &:focus {
+    .icon-foreground {
+      fill: $color-email;
+    }
+  }
+}
+
+// LinkedIn
+.site-footer--icons__linkedin {
+  color: $color-linkedin;
+  &:hover,
+  &:focus {
+    .icon-foreground {
+      fill: $color-linkedin;
     }
   }
 }
