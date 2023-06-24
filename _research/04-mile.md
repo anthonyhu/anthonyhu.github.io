@@ -3,7 +3,7 @@ layout: research
 title: "Model-Based Imitation Learning for Urban Driving"
 authors: Anthony Hu, Gianluca Corrado, Nicolas Griffiths, Zak Murez, Corina Gurau, Hudson Yeo, Alex Kendall, Roberto Cipolla, Jamie Shotton
 venue: Neural Information Processing Systems (NeurIPS 2022)
-thumbnail: thumbnails/mile_thumbnail.png
+thumbnail: thumbnails/mile_thumbnail.gif
 permalink: mile
 ---
 <center>

@@ -6,9 +6,9 @@ title: Research
 
 <div>
   <span>
-  <p><a href="{{ post.url }}">{{ post.title }}</a></p> 
+  <p><b><a href="{{ post.url }}">{{ post.title }}</a></b></p> 
   <p>{{ post.authors }}</p>
-  <p>{{ post.venue }}</p>
+  <p><b>{{ post.venue }}</b></p>
   </span>
   <a href="{{ post.url }}"><img src="{{post.thumbnail}}"></a>
 </div>
