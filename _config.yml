@@ -3,7 +3,7 @@ permalink:           pretty
 
 # Setup
 title:               Anthony Hu
-tagline:             Personal blog
+tagline:
 url:                 https://anthonyhu.github.io/
 paginate:            1
 baseurl:             ""
@@ -19,7 +19,7 @@ sass:
 author:
   name:              Anthony Hu
   url:               https://twitter.com/hu_anth
-  email:             ah2029@cam.ac.uk
+  email:             anthony@wayve.ai
 
 plugins:
   - jekyll-paginate
@@ -27,9 +27,9 @@ plugins:
 
 # Navigation bar
 pages_list:
-  Blog: '/posts'
   Research: '/research'
-  About: '/about'
+  Blog posts: '/posts'
+  #About: '/about'
 
 # Google Analytics ID
 google_analytics: G-ZEX81SMNGH
