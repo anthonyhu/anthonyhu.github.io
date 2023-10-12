@@ -7,7 +7,7 @@ title: Home
 
 I’m a researcher at Wayve, an autonomous driving company based in London, UK. My research interests are at the intersection of generative modelling, computer vision, and policy learning. 
 
-I obtained my PhD from the University of Cambridge in 2022, with my thesis entitled  “Neural World Models for Computer Vision”. Prior to that, I went to Telecom Paris (a French Engineering Grande Ecole) and specialised in Maths and Computer Science.
+I obtained a PhD from the University of Cambridge with my thesis entitled “Neural World Models for Computer Vision”. Prior to that, I went to Telecom Paris (a French Engineering Grande Ecole) and specialised in Maths and Computer Science.
 
 <!-- The timeline is defined in __config.yml. Needs `css, js, partials, scss` folders and `_layouts/about.html`-->
 
