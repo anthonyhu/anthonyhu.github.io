@@ -5,11 +5,9 @@ title: Home
 
 <p align='center'><img src='/img/me.jpg' alt='Me' width='200'/></p>
 
-My research is on representation learning from video (geometry, semantics, motion), and policy learning
-(imitation, reinforcement) for intelligent robots.
+I’m a researcher at Wayve, an autonomous driving company based in London, UK. My research interests are at the intersection of generative modelling, computer vision, and policy learning. 
 
-I did my PhD in Computer Vision at the University of Cambridge, under the supervision of Alex Kendall and Roberto Cipolla.
-Prior to that I went to Telecom Paris, a French Engineering Grande Ecole, and I graduated from the University of Oxford with an MSc in Statistical Science.
+I obtained my PhD from the University of Cambridge in 2022, with my thesis entitled  “Neural World Models for Computer Vision”. Prior to that, I went to Telecom Paris (a French Engineering Grande Ecole) and specialised in Maths and Computer Science.
 
 <!-- The timeline is defined in __config.yml. Needs `css, js, partials, scss` folders and `_layouts/about.html`-->
 
