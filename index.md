@@ -7,7 +7,7 @@ title: Home
 
 I like building scalable world models from high-dimensional videos in order to train intelligent agents. 
 
-I lead generative world modelling at Wayve, an autonomous driving company based in London. I obtained my PhD in Computer Vision from the University of Cambridge, and prior to that I went to Telecom Paris with a specialisation in Maths and Computer Science.
+I lead generative world modelling at Wayve, an autonomous driving company based in London. Prior to that, I obtained my PhD in Computer Vision from the University of Cambridge, and went to Telecom Paris with a specialisation in Maths and Computer Science.
 
 <!-- The timeline is defined in __config.yml. Needs `css, js, partials, scss` folders and `_layouts/about.html`-->
 
