@@ -46,7 +46,7 @@ curriculum:
   - image: img/wayve.png
     title: Wayve
     info: 2019 - Present
-    description: "Applied Scientist"
+    description: "Staff Scientist"
     url: https://wayve.ai/
   - image: img/cambridge.png
     title: University of Cambridge
@@ -71,5 +71,5 @@ curriculum:
   - image: img/saint-louis.png
     title: Lycee Saint-Louis
     info: 2012-2014
-    description: Classes Preparatoires (Maths and Physics)
+    description: Classes Préparatoires (Maths and Physics)
     url: https://lycee-saintlouis.fr/

@@ -5,9 +5,9 @@ title: Home
 
 <p align='center'><img src='/img/me.jpg' alt='Me' width='200'/></p>
 
-I’m a researcher at Wayve, an autonomous driving company based in London, UK. My research interests are at the intersection of generative modelling, computer vision, and policy learning. 
+I like building scalable world models from high-dimensional videos in order to train intelligent agents. 
 
-I obtained a PhD from the University of Cambridge with my thesis entitled “Neural World Models for Computer Vision”. Prior to that, I went to Telecom Paris (a French Engineering Grande Ecole) and specialised in Maths and Computer Science.
+I lead generative world modelling at Wayve, an autonomous driving company based in London. I obtained my PhD in Computer Vision from the University of Cambridge, and prior to that I went to Telecom Paris with a specialisation in Maths and Computer Science.
 
 <!-- The timeline is defined in __config.yml. Needs `css, js, partials, scss` folders and `_layouts/about.html`-->
 
