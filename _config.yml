@@ -28,7 +28,7 @@ plugins:
 # Navigation bar
 pages_list:
   Research: '/research'
-  Blog posts: '/posts'
+  #Blog posts: '/posts'
 
 # Google Analytics ID
 google_analytics: G-ZEX81SMNGH
