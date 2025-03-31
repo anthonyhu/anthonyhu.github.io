@@ -15,7 +15,7 @@ Anthony Hu* &emsp; Lloyd Russell* &emsp; Hudson Yeo* &emsp; Zak Murez &emsp; Geo
 
 <p>Wayve</p>
 <b><a href="https://arxiv.org/pdf/2309.17080.pdf">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve.ai/thinking/scaling-gaia-1/">
-Blog</a> &emsp; &emsp; &emsp;</b>
+Blog</a></b>
 </center>
 
 

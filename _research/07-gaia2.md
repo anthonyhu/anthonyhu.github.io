@@ -15,7 +15,7 @@ Lloyd Russell* &emsp; Anthony Hu* &emsp; Lorenzo Bertoni* &emsp; George Fedoseev
 
 <p>Wayve</p>
 <b><a href="https://arxiv.org/pdf/2503.20523">Paper</a> &emsp; &emsp; &emsp;<a href="https://wayve.ai/thinking/gaia-2/">
-Blog</a> &emsp; &emsp; &emsp;</b>
+Blog</a></b>
 </center>
 
 
